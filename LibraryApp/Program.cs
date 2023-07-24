@@ -1,7 +1,13 @@
+using Contracts;
+using LibraryApp.Extensions;
+using Microsoft.AspNetCore.HttpOverrides;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.ConfigureCors();
+builder.Services.ConfigureIISIntegration();
 
 var app = builder.Build();
 
@@ -15,6 +21,12 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.All
+});
+app.UseCors("CorsPolicy");
+
 
 app.UseRouting();
 

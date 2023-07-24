@@ -1,11 +1,10 @@
 ﻿using Contracts;
-using Repository;
-using LoggerService;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 using Service;
 using Service.Contracts;
 
-namespace DebtNote.Extensions
+namespace LibraryApp.Extensions
 {
     public static class ServiceExtensions
     {
@@ -19,8 +18,6 @@ namespace DebtNote.Extensions
             });
         public static void ConfigureIISIntegration(this IServiceCollection services) =>
             services.Configure<IISOptions>(options => {});
-        public static void ConfigureLoggerService(this IServiceCollection services) =>
-            services.AddScoped<ILoggerManager, LoggerManager>();
         public static void ConfigureRepositoryManager(this IServiceCollection services) =>
             services.AddScoped<IRepositoryManager, RepositoryManager>();
         public static void ConfigureServiceManager(this IServiceCollection services) =>
