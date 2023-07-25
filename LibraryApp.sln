@@ -3,19 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryApp", "LibraryApp\LibraryApp.csproj", "{BBB8103E-D53A-4F2B-A22E-0E800C6D0872}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryApp", "LibraryApp\LibraryApp.csproj", "{BBB8103E-D53A-4F2B-A22E-0E800C6D0872}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{5048357B-8D7B-4EE8-8092-087596930295}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{5048357B-8D7B-4EE8-8092-087596930295}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{60C1993A-CFA8-4CAB-84E2-9F7065013E64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{60C1993A-CFA8-4CAB-84E2-9F7065013E64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{CA7D9ACF-6DF7-4D4F-84A6-DFE9C2F2F60F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{CA7D9ACF-6DF7-4D4F-84A6-DFE9C2F2F60F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{773A863E-9870-419D-A726-8898327861A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{773A863E-9870-419D-A726-8898327861A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContracts", "ServiceContracts\ServiceContracts.csproj", "{25CC8EAA-96F7-427A-93BF-1F407D138C72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceContracts", "ServiceContracts\ServiceContracts.csproj", "{25CC8EAA-96F7-427A-93BF-1F407D138C72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{14E6047E-EAD3-4409-84BD-8A3515432461}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{14E6047E-EAD3-4409-84BD-8A3515432461}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryAppAPI", "LibraryAppAPI\LibraryAppAPI.csproj", "{4B31B8C2-D702-4AE2-829C-055A56A99715}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{14E6047E-EAD3-4409-84BD-8A3515432461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14E6047E-EAD3-4409-84BD-8A3515432461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14E6047E-EAD3-4409-84BD-8A3515432461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B31B8C2-D702-4AE2-829C-055A56A99715}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B31B8C2-D702-4AE2-829C-055A56A99715}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B31B8C2-D702-4AE2-829C-055A56A99715}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B31B8C2-D702-4AE2-829C-055A56A99715}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

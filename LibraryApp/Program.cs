@@ -1,13 +1,10 @@
 using Contracts;
-using LibraryApp.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.ConfigureCors();
-builder.Services.ConfigureIISIntegration();
 
 var app = builder.Build();
 
