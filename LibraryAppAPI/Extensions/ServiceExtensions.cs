@@ -4,7 +4,7 @@ using Repository;
 using Service;
 using Service.Contracts;
 
-namespace LibraryApp.Extensions
+namespace LibraryAppAPI.Extensions
 {
     public static class ServiceExtensions
     {

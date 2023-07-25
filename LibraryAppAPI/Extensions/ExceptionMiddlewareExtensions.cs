@@ -4,7 +4,7 @@ using Entities.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 
-namespace LibraryApp.Extensions
+namespace LibraryAppAPI.Extensions
 {
     public static class ExceptionMiddlewareExtensions
     {

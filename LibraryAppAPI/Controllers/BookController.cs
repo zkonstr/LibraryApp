@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Contracts;
+using Microsoft.AspNetCore.Mvc;
+using Service.Contracts;
 
 namespace LibraryAppAPI.Controllers
 {
@@ -6,11 +8,25 @@ namespace LibraryAppAPI.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
+        private readonly IServiceManager _service;
+        private readonly IRepositoryManager _repository;
+
+        public BookController
+            (IRepositoryManager repository, IServiceManager service)
+        {
+            _repository = repository;
+            _service = service;
+        }
         // GET: api/<BookController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
+        }
+        public IActionResult GetBooks()
+        {
+            var users = _service.BookService.GetAllBooks(trackChanges: false);
+            return Ok(users);
         }
 
         // GET api/<BookController>/5
