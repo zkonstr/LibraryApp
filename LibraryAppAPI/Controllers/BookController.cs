@@ -1,6 +1,6 @@
 ﻿using Contracts;
 using Microsoft.AspNetCore.Mvc;
-using Service.Contracts;
+using ServiceContracts;
 
 namespace LibraryAppAPI.Controllers
 {

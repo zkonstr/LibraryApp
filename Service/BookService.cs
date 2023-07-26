@@ -2,12 +2,12 @@
 using Contracts;
 using Entities.Exceptions;
 using Entities.Models;
-using Service.Contracts;
+using ServiceContracts;
 using Shared.DataTransferObjects;
 
 namespace Service
 {
-    internal sealed class BookService : IBookRepository
+    internal sealed class BookService : IBookService
     {
         private readonly IRepositoryManager _repository;
         //private readonly ILoggerManager _logger;
@@ -62,5 +62,7 @@ namespace Service
             _mapper.Map(bookForUpdate, bookEntity);
             _repository.Save();
         }
+
+        
     }
 }
