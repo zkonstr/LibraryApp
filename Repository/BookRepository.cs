@@ -2,21 +2,24 @@
 using Entities.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Repository
 {
     public class BookRepository : RepositoryBase<Book>, IBookRepository
     {
-        public BookRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        public BookRepository(RepositoryContext repositoryContext) 
+        : base(repositoryContext)
         {
         }
         public void CreateBook(Book book) => Create(book);
 
         public IEnumerable<Book> GetByIds(IEnumerable<Guid> ids, bool trackChanges) =>
-            FindByCondition(u => ids.Contains(u.Id), trackChanges).ToList();
+            FindByCondition(b => ids.Contains(b.Id), trackChanges).ToList();
 
         public IEnumerable<Book> GetAllBooks(bool trackChanges) => FindAll(trackChanges).OrderBy(c => c.ISBN).ToList();
 

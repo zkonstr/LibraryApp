@@ -7,6 +7,5 @@ using System.Threading.Tasks;
 namespace Shared.DataTransferObjects
 {
     public record BookForUpdateDTO
-    {
-    }
+    (string ISBN, string Title, string Description, string Author, string Genre);
 }

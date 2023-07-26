@@ -1,5 +1,5 @@
-﻿using Contracts;
-using Service.Contracts;
+﻿using AutoMapper;
+using Contracts;
 using ServiceContracts;
 
 namespace Service
@@ -9,12 +9,12 @@ namespace Service
     {
         private readonly Lazy<IUserService> _userService;
         private readonly Lazy<IBookService> _bookService;
-        public ServiceManager(IRepositoryManager repositoryManager)
+        public ServiceManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
             _userService = new Lazy<IUserService>(() =>
-            new UserService(repositoryManager));
-            _bookService = new Lazy<IBookService>(() => 
-            new BookService(repositoryManager));
+            new UserService(repositoryManager,mapper));
+            _bookService = new Lazy<IBookService>(() =>
+            new BookService(repositoryManager, mapper));
         }
 
         public IUserService UserService => _userService.Value;

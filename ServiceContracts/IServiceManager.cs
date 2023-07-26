@@ -1,6 +1,6 @@
 ﻿using ServiceContracts;
 
-namespace Service.Contracts
+namespace ServiceContracts
 {
     public interface IServiceManager
     {

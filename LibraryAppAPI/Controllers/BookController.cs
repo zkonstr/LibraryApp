@@ -23,11 +23,11 @@ namespace LibraryAppAPI.Controllers
         {
             return new string[] { "value1", "value2" };
         }
-        public IActionResult GetBooks()
-        {
-            var users = _service.BookService.GetAllBooks(trackChanges: false);
-            return Ok(users);
-        }
+        //public IActionResult GetBooks()
+        //{
+        //    var books = _service.BookService.GetAllBooks(trackChanges: false);
+        //    return Ok(books);
+        //}
 
         // GET api/<BookController>/5
         [HttpGet("{id}")]
