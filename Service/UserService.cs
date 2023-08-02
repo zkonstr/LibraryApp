@@ -21,47 +21,47 @@ namespace Service
             _mapper = mapper;
         }
 
-        public IEnumerable<UserDTO> GetAllUsers(bool trackChanges)
+        public async Task<IEnumerable<UserDTO>> GetAllUsersAsync(bool trackChanges)
         {
-            var users = _repository.User.GetAllUsers(trackChanges);
+            var users = await _repository.User.GetAllUsersAsync(trackChanges);
             var usersDto = _mapper.Map<IEnumerable<UserDTO>>(users);
             return usersDto;
         }
 
-        public UserDTO GetUser(Guid id, bool trackChanges)
+        public async Task<UserDTO> GetUserAsync(Guid id, bool trackChanges)
         {
-            var user = _repository.User.GetUser(id, trackChanges);
+            var user = await _repository.User.GetUserAsync(id, trackChanges);
             if (user is null)
                 throw new UserNotFoundException(id);
             var userDto = _mapper.Map<UserDTO>(user);
             return userDto;
         }
 
-        public UserDTO CreateUser(UserForCreationDTO user)
+        public async Task<UserDTO> CreateUserAsync(UserForCreationDTO user)
         {
             var UserEntity = _mapper.Map<User>(user);
             _repository.User.CreateUser(UserEntity);
-            _repository.Save();
+            await _repository.SaveAsync();
             var UserToReturn = _mapper.Map<UserDTO>(UserEntity);
             return UserToReturn;
         }
 
-        public void DeleteUser(Guid id,bool trackChanges)
+        public async Task DeleteUserAsync(Guid id,bool trackChanges)
         {
-            var user = _repository.User.GetUser(id, trackChanges);
+            var user = await _repository.User.GetUserAsync(id, trackChanges);
             if (user is null)
                 throw new UserNotFoundException(id);
             _repository.User.DeleteUser(user);
-            _repository.Save();
+            await _repository.SaveAsync();
         }
 
-        public void UpdateUser(Guid id, UserForUpdateDTO userForUpdate, bool trackChanges)
+        public async Task UpdateUserAsync(Guid id, UserForUpdateDTO userForUpdate, bool trackChanges)
         {
-            var userEntity = _repository.User.GetUser(id, trackChanges);
+            var userEntity = await _repository.User.GetUserAsync(id, trackChanges);
             if (userEntity is null)
                 throw new UserNotFoundException(id);
             _mapper.Map(userForUpdate, userEntity);
-            _repository.Save();
+            await _repository.SaveAsync();
         }
     }
 }

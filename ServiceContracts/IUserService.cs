@@ -4,15 +4,15 @@ namespace ServiceContracts
 {
     public interface IUserService
     {
-        IEnumerable<UserDTO> GetAllUsers(bool trackChanges);
+        Task<IEnumerable<UserDTO>> GetAllUsersAsync(bool trackChanges);
 
-        UserDTO GetUser(Guid id, bool trackChanges);
+        Task<UserDTO> GetUserAsync(Guid id, bool trackChanges);
 
-        UserDTO CreateUser(UserForCreationDTO user);
+        Task<UserDTO> CreateUserAsync(UserForCreationDTO user);
 
-        void UpdateUser(Guid userId,UserForUpdateDTO userForUpdate,bool trackChanges);
+        Task UpdateUserAsync(Guid userId,UserForUpdateDTO userForUpdate,bool trackChanges);
 
-        void DeleteUser(Guid userId,bool trackChanges);
+        Task DeleteUserAsync(Guid userId,bool trackChanges);
 
     }
 }

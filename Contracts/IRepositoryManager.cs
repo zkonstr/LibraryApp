@@ -4,6 +4,7 @@
     {
         IUserRepository User { get; }
         IBookRepository Book { get; }
-        void Save();
+        IBookUserReferenceRepository BookUserReference { get; }
+        Task SaveAsync();
     }
 }

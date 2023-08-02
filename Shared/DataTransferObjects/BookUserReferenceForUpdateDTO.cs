@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.DataTransferObjects
 {
-    public record BookUserReferenceToUpdateDTO
+    public record BookUserReferenceForUpdateDTO
     {
     }
 }

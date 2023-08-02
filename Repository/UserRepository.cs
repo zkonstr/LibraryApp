@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -18,19 +19,15 @@ namespace Repository
         }
         public void CreateUser(User user) => Create(user);
 
-        public IEnumerable<User> GetByIds(IEnumerable<Guid> ids, bool trackChanges) =>
-            FindByCondition(u => ids.Contains(u.Id), trackChanges).ToList();
+        public async Task<IEnumerable<User>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges) =>
+            await FindByCondition(u => ids.Contains(u.Id), trackChanges).ToListAsync();
 
-        public IEnumerable<User> GetAllUsers(bool trackChanges) => FindAll(trackChanges).OrderBy(c => c.Name).ToList();
+        public async Task<IEnumerable<User>> GetAllUsersAsync(bool trackChanges) => await FindAll(trackChanges).OrderBy(c => c.Name).ToListAsync();
 
-        public User GetUser(Guid Id, bool trackChanges) =>
-            FindByCondition(c => c.Id.Equals(Id), trackChanges).SingleOrDefault();
+        public async Task<User> GetUserAsync(Guid Id, bool trackChanges) =>
+            await FindByCondition(c => c.Id.Equals(Id), trackChanges).SingleOrDefaultAsync();
 
         public void DeleteUser(User user) => Delete(user);
 
-        public void UpdateUser(User user)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using ServiceContracts;
 
 namespace LibraryAppAPI.Controllers
@@ -9,19 +10,18 @@ namespace LibraryAppAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IServiceManager _service;
-        private readonly IRepositoryManager _repository;
 
         public UserController
-            (IRepositoryManager repository, IServiceManager service)
+            ( IServiceManager service)
         {
-            _repository = repository;
             _service = service;
         }
         // GET: api/<UserController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetUsers()
         {
-            return new string[] { "value1", "value2" };
+            var users = await _service.UserService.GetAllUsersAsync(trackChanges: false);
+            return Ok(users);
         }
 
         // GET api/<UserController>/5

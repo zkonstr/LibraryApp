@@ -9,11 +9,10 @@ namespace Contracts
 {
     public interface IUserRepository
     {
-        IEnumerable<User> GetAllUsers(bool trackChanges);
-        IEnumerable<User> GetByIds(IEnumerable<Guid> ids, bool trackChanges);
-        User GetUser(Guid Id, bool trackChanges);
+        Task<IEnumerable<User>> GetAllUsersAsync(bool trackChanges);
+        Task<IEnumerable<User>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges);
+        Task<User> GetUserAsync(Guid Id, bool trackChanges);
         void CreateUser(User user);
-        void UpdateUser(User user);
         void DeleteUser(User user);
     }
 }

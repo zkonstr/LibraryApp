@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -18,19 +19,15 @@ namespace Repository
         }
         public void CreateBook(Book book) => Create(book);
 
-        public IEnumerable<Book> GetByIds(IEnumerable<Guid> ids, bool trackChanges) =>
-            FindByCondition(b => ids.Contains(b.Id), trackChanges).ToList();
+        public async Task<IEnumerable<Book>> GetByIds(IEnumerable<Guid> ids, bool trackChanges) =>
+            await FindByCondition(b => ids.Contains(b.Id), trackChanges).ToListAsync();
 
-        public IEnumerable<Book> GetAllBooks(bool trackChanges) => FindAll(trackChanges).OrderBy(c => c.ISBN).ToList();
+        public async Task<IEnumerable<Book>> GetAllBooks(bool trackChanges) => await FindAll(trackChanges).OrderBy(c => c.ISBN).ToListAsync();
 
-        public Book GetBook(Guid Id, bool trackChanges) =>
-            FindByCondition(c => c.Id.Equals(Id), trackChanges).SingleOrDefault();
+        public async Task<Book> GetBook(Guid Id, bool trackChanges) =>
+            await FindByCondition(c => c.Id.Equals(Id), trackChanges).SingleOrDefaultAsync();
 
         public void DeleteBook(Book book) => Delete(book);
 
-        public void UpdateBook(Book book)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
