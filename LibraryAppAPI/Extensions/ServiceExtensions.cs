@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service;
-using Service.Contracts;
+using ServiceContracts;
 
 namespace LibraryAppAPI.Extensions
 {

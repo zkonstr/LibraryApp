@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,13 +17,13 @@ namespace Repository
         }
         public void CreateBookUserReference(BookUserReference bookUserReference) => Create(bookUserReference);
 
-        public IEnumerable<BookUserReference> GetByIds(IEnumerable<Guid> ids, bool trackChanges) =>
-            FindByCondition(b => ids.Contains(b.Id), trackChanges).ToList();
+        public async Task<IEnumerable<BookUserReference>> GetByIds(IEnumerable<Guid> ids, bool trackChanges) =>
+            await FindByCondition(b => ids.Contains(b.Id), trackChanges).ToListAsync();
 
-        public IEnumerable<BookUserReference> GetAllBookUserReferences(bool trackChanges) => FindAll(trackChanges).OrderBy(c => c.OrderDate).ToList();
+        public async Task<IEnumerable<BookUserReference>> GetAllBookUserReferences(bool trackChanges) =>await FindAll(trackChanges).OrderBy(c => c.OrderDate).ToListAsync();
 
-        public BookUserReference GetBookUserReference(Guid Id, bool trackChanges) =>
-            FindByCondition(c => c.Id.Equals(Id), trackChanges).SingleOrDefault();
+        public async Task<BookUserReference> GetBookUserReference(Guid Id, bool trackChanges) =>
+            await FindByCondition(c => c.Id.Equals(Id), trackChanges).SingleOrDefaultAsync();
 
         public void DeleteBookUserReference(BookUserReference bookUserReference) => Delete(bookUserReference);
 

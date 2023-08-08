@@ -9,9 +9,9 @@ namespace Contracts
 {
     public interface IBookUserReferenceRepository
     {
-        IEnumerable<BookUserReference> GetAllBookUserReferences(Guid userId, bool trackChanges);
-        IEnumerable<BookUserReference> GetByIds( IEnumerable<Guid> ids, bool trackChanges);
-        BookUserReference GetBookUserReference(string bookISBN, Guid Id, bool trackChanges);
+        Task<IEnumerable<BookUserReference>> GetAllBookUserReferences(bool trackChanges);
+        Task<IEnumerable<BookUserReference>> GetByIds( IEnumerable<Guid> ids, bool trackChanges);
+        Task<BookUserReference> GetBookUserReference( Guid Id, bool trackChanges);
         void CreateBookUserReference(BookUserReference bookUserReference);
         void UpdateBookUserReference(BookUserReference bookUserReference);
         void DeleteBookUserReference(BookUserReference bookUserReference);

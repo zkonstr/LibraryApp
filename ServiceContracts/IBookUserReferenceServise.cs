@@ -9,14 +9,14 @@ namespace ServiceContracts
 {
     public interface IBookUserReferenceServise
     {
-        Task<IEnumerable<BookUserReferenceDTO>> GetAllBookUserReferences(Guid userId, bool trackChanges);
+        Task<IEnumerable<BookUserReferenceDTO>> GetAllBookUserReferencesAsync(bool trackChanges);
 
-        Task<BookUserReferenceDTO> GetBookUserReference(string bookId, bool trackChanges);
+        Task<BookUserReferenceDTO> GetBookUserReferenceAsync(Guid id, bool trackChanges);
 
-        Task<BookUserReferenceDTO> CreateBookUserReference(BookUserReferenceForCreationDTO bookUserReference);
+        Task<BookUserReferenceDTO> CreateBookUserReferenceAsync(BookUserReferenceForCreationDTO bookUserReference, bool trackChanges);
 
-        Task UpdateBookUserReference(Guid bookUserReferenceId, BookUserReferenceForUpdateDTO bookUserReferenceForUpdate, bool trackChanges);
+        Task UpdateBookUserReferenceAsync(Guid bookUserReferenceId, BookUserReferenceForUpdateDTO bookUserReferenceForUpdate, bool trackChanges);
 
-        Task DeleteBookUserReference(Guid bookUserReferenceId, bool trackChanges);
+        Task DeleteBookUserReferenceAsync(Guid bookUserReferenceId, bool trackChanges);
     }
 }

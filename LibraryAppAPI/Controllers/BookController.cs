@@ -1,6 +1,8 @@
 ﻿using Contracts;
 using Microsoft.AspNetCore.Mvc;
 using ServiceContracts;
+using Shared.DataTransferObjects;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace LibraryAppAPI.Controllers
 {
@@ -19,39 +21,50 @@ namespace LibraryAppAPI.Controllers
         }
         // GET: api/<BookController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetBooks()
         {
-            return new string[] { "value1", "value2" };
+            var books = await _service.BookService.GetAllBooksAsync(trackChanges: false);
+            return Ok(books);
         }
-        //public IActionResult GetBooks()
-        //{
-        //    var books = _service.BookService.GetAllBooks(trackChanges: false);
-        //    return Ok(books);
-        //}
 
         // GET api/<BookController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id:guid}", Name = "BookById")]
+        public async Task<IActionResult> GetBook(Guid id)
         {
-            return "value";
+            var book = await _service.BookService.GetBookAsync(id,trackChanges: false);
+            return Ok(book);
         }
 
         // POST api/<BookController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> CreateBook([FromBody] BookForCreationDTO book)
         {
+            if (book is null)
+                return BadRequest("BookForCreationDto object is null");
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+            var createdBook = await _service.BookService.CreateBookAsync(book);
+            return CreatedAtRoute("BookById", new { id = createdBook.Id },
+            createdBook);
+
         }
 
         // PUT api/<BookController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateBook(Guid id, [FromBody] BookForUpdateDTO book)
         {
+            if (book is null)
+                return BadRequest("BookForUpdateDto object is null");
+            await _service.BookService.UpdateBookAsync(id, book, trackChanges:true);
+            return NoContent();
         }
 
         // DELETE api/<BookController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteBook(Guid id)
         {
+            await _service.BookService.DeleteBookAsync(id, trackChanges: false);
+            return NoContent();
         }
     }
 }

@@ -1,4 +1,8 @@
-﻿using ServiceContracts;
+﻿using AutoMapper;
+using Contracts;
+using Entities.Exceptions;
+using Entities.Models;
+using ServiceContracts;
 using Shared.DataTransferObjects;
 using System;
 using System.Collections.Generic;
@@ -10,29 +14,57 @@ namespace Service
 {
     internal sealed class BookUserReferenceServise : IBookUserReferenceServise
     {
-        public BookUserReferenceDTO CreateBookUserReference(BookUserReferenceForCreationDTO bookUserReference)
+        private readonly IRepositoryManager _repository;
+        //private readonly ILoggerManager _logger;
+        private readonly IMapper _mapper;
+
+        public BookUserReferenceServise(IRepositoryManager repository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _repository = repository;
+            //_logger = logger;
+            _mapper = mapper;
+        }
+        public async Task<BookUserReferenceDTO> CreateBookUserReferenceAsync(BookUserReferenceForCreationDTO reference, bool trackChanges)
+        {
+            var ReferenceEntity = _mapper.Map<BookUserReference>(reference);
+            _repository.BookUserReference.CreateBookUserReference(ReferenceEntity);
+            await _repository.SaveAsync();
+            var ReferenceToReturn = _mapper.Map<BookUserReferenceDTO>(ReferenceEntity);
+            return ReferenceToReturn;
         }
 
-        public void DeleteBookUserReference(Guid bookUserReferenceId, bool trackChanges)
-        {
-            throw new NotImplementedException();
+        public async Task DeleteBookUserReferenceAsync(Guid bookUserReferenceId, bool trackChanges)
+        { 
+            var reference = await _repository.BookUserReference.GetBookUserReference(bookUserReferenceId, trackChanges);
+            if (reference is null)
+                throw new BookNotFoundException(bookUserReferenceId);
+            _repository.BookUserReference.DeleteBookUserReference(reference);
+            await _repository.SaveAsync();
         }
 
-        public IEnumerable<BookUserReferenceDTO> GetAllBookUserReferences(Guid userId, bool trackChanges)
+        public async Task<IEnumerable<BookUserReferenceDTO>> GetAllBookUserReferencesAsync(bool trackChanges)
         {
-            throw new NotImplementedException();
+            var references = await _repository.BookUserReference.GetAllBookUserReferences(trackChanges);
+            var referencesDto = _mapper.Map<IEnumerable<BookUserReferenceDTO>>(references);
+            return referencesDto;
         }
 
-        public BookUserReferenceDTO GetBookUserReference(string bookISBN, bool trackChanges)
+        public async Task<BookUserReferenceDTO> GetBookUserReferenceAsync(Guid id, bool trackChanges)
         {
-            throw new NotImplementedException();
+            var reference = await _repository.BookUserReference.GetBookUserReference(id, trackChanges);
+            if (reference is null)
+                throw new BookNotFoundException(id);
+            var referenceDto = _mapper.Map<BookUserReferenceDTO>(reference);
+            return referenceDto;
         }
 
-        public void UpdateBookUserReference(Guid bookUserReferenceId, BookUserReferenceForUpdateDTO bookUserReferenceForUpdate, bool trackChanges)
+        public async Task UpdateBookUserReferenceAsync(Guid id, BookUserReferenceForUpdateDTO referenceForUpdate, bool trackChanges)
         {
-            throw new NotImplementedException();
+            var referenceEntity = await _repository.BookUserReference.GetBookUserReference(id, trackChanges);
+            if (referenceEntity is null)
+                throw new BookNotFoundException(id);
+            _mapper.Map(referenceForUpdate, referenceEntity);
+            await _repository.SaveAsync();
         }
     }
 }
