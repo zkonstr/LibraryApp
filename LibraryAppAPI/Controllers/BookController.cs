@@ -11,12 +11,10 @@ namespace LibraryAppAPI.Controllers
     public class BookController : ControllerBase
     {
         private readonly IServiceManager _service;
-        private readonly IRepositoryManager _repository;
 
         public BookController
-            (IRepositoryManager repository, IServiceManager service)
+            ( IServiceManager service)
         {
-            _repository = repository;
             _service = service;
         }
         // GET: api/<BookController>

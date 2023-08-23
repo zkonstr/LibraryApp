@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace ServiceContracts
 {
-    public interface IBookUserReferenceServise
+    public interface IBookUserReferenceService
     {
         Task<IEnumerable<BookUserReferenceDTO>> GetAllBookUserReferencesAsync(bool trackChanges);
 
         Task<BookUserReferenceDTO> GetBookUserReferenceAsync(Guid id, bool trackChanges);
 
-        Task<BookUserReferenceDTO> CreateBookUserReferenceAsync(BookUserReferenceForCreationDTO bookUserReference, bool trackChanges);
+        Task<BookUserReferenceDTO> CreateBookUserReferenceAsync(BookUserReferenceForCreationDTO bookUserReference);
 
         Task UpdateBookUserReferenceAsync(Guid bookUserReferenceId, BookUserReferenceForUpdateDTO bookUserReferenceForUpdate, bool trackChanges);
 

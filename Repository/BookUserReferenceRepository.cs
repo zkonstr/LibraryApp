@@ -27,9 +27,5 @@ namespace Repository
 
         public void DeleteBookUserReference(BookUserReference bookUserReference) => Delete(bookUserReference);
 
-        public void UpdateBookUserReference(BookUserReference bookUserReference)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

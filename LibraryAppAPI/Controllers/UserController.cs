@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 using ServiceContracts;
+using Shared.DataTransferObjects;
 
 namespace LibraryAppAPI.Controllers
 {
@@ -25,28 +26,43 @@ namespace LibraryAppAPI.Controllers
         }
 
         // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{id:guid}", Name = "UserById")]
+        public async Task<IActionResult> GetUser(Guid id)
         {
-            return "value";
+            var user = await _service.UserService.GetUserAsync(id, trackChanges: false);
+            return Ok(user);
         }
 
         // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> CreateUser([FromBody] UserForCreationDTO user)
         {
+            if (user is null)
+                return BadRequest("UserForCreationDto object is null");
+            if (!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+            var createdUser = await _service.UserService.CreateUserAsync(user);
+            return CreatedAtRoute("UserById", new { id = createdUser.Id },
+            createdUser);
+
         }
 
         // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id:guid}")]
+        public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UserForUpdateDTO user)
         {
+            if (user is null)
+                return BadRequest("UserForUpdateDto object is null");
+            await _service.UserService.UpdateUserAsync(id, user, trackChanges: true);
+            return NoContent();
         }
 
         // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{id:guid}")]
+        public async Task<IActionResult> DeleteUser(Guid id)
         {
+            await _service.UserService.DeleteUserAsync(id, trackChanges: false);
+            return NoContent();
         }
     }
 }

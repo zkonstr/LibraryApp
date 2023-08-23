@@ -13,7 +13,6 @@ namespace Contracts
         Task<IEnumerable<BookUserReference>> GetByIds( IEnumerable<Guid> ids, bool trackChanges);
         Task<BookUserReference> GetBookUserReference( Guid Id, bool trackChanges);
         void CreateBookUserReference(BookUserReference bookUserReference);
-        void UpdateBookUserReference(BookUserReference bookUserReference);
         void DeleteBookUserReference(BookUserReference bookUserReference);
     }
 }

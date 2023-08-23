@@ -12,19 +12,19 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    internal sealed class BookUserReferenceServise : IBookUserReferenceServise
+    internal sealed class BookUserReferenceService : IBookUserReferenceService
     {
         private readonly IRepositoryManager _repository;
         //private readonly ILoggerManager _logger;
         private readonly IMapper _mapper;
 
-        public BookUserReferenceServise(IRepositoryManager repository, IMapper mapper)
+        public BookUserReferenceService(IRepositoryManager repository, IMapper mapper)
         {
             _repository = repository;
             //_logger = logger;
             _mapper = mapper;
         }
-        public async Task<BookUserReferenceDTO> CreateBookUserReferenceAsync(BookUserReferenceForCreationDTO reference, bool trackChanges)
+        public async Task<BookUserReferenceDTO> CreateBookUserReferenceAsync(BookUserReferenceForCreationDTO reference)
         {
             var ReferenceEntity = _mapper.Map<BookUserReference>(reference);
             _repository.BookUserReference.CreateBookUserReference(ReferenceEntity);
