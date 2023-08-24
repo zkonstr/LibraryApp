@@ -27,7 +27,10 @@ namespace Repository
         public async Task<Book> GetBook(Guid Id, bool trackChanges) =>
             await FindByCondition(c => c.Id.Equals(Id), trackChanges).SingleOrDefaultAsync();
 
+
         public void DeleteBook(Book book) => Delete(book);
 
+        public async Task<Book> GetBookByISBN(string ISBN, bool trackChanges) =>
+            await FindByCondition(c => c.ISBN.Equals(ISBN), trackChanges).SingleOrDefaultAsync();
     }
 }

@@ -32,6 +32,12 @@ namespace LibraryAppAPI.Controllers
             var book = await _service.BookService.GetBookAsync(id,trackChanges: false);
             return Ok(book);
         }
+        [HttpGet("{id:guid}", Name = "BookByISBN")]
+        public async Task<IActionResult> GetBookByISBN(string ISBN)
+        {
+            var book = await _service.BookService.GetBookByISBNAsync(ISBN, trackChanges: false);
+            return Ok(book);
+        }
 
         // POST api/<BookController>
         [HttpPost]

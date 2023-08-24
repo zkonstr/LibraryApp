@@ -12,6 +12,7 @@ namespace Contracts
         Task<IEnumerable<Book>> GetAllBooks(bool trackChanges);
         Task<IEnumerable<Book>> GetByIds(IEnumerable<Guid> ids, bool trackChanges);
         Task<Book> GetBook(Guid Id, bool trackChanges);
+        Task<Book> GetBookByISBN(string ISBN, bool trackChanges);
         void CreateBook(Book book);
         void DeleteBook(Book book);
     }

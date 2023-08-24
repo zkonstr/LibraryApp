@@ -63,5 +63,13 @@ namespace Service
             await _repository.SaveAsync();
         }
 
+        public async Task<BookDTO> GetBookByISBNAsync(string ISBN, bool trackChanges)
+        {
+            var book = await _repository.Book.GetBookByISBN(ISBN, trackChanges);
+            if (book is null)
+                throw new BookNotFoundByISBNException(ISBN);
+            var bookDto = _mapper.Map<BookDTO>(book);
+            return bookDto;
+        }
     }
 }

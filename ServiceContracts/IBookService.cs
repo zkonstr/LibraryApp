@@ -7,6 +7,7 @@ namespace ServiceContracts
         Task<IEnumerable<BookDTO>> GetAllBooksAsync(bool trackChanges);
 
         Task<BookDTO> GetBookAsync(Guid id, bool trackChanges);
+        Task<BookDTO> GetBookByISBNAsync(string ISBN, bool trackChanges);
 
         Task<BookDTO> CreateBookAsync(BookForCreationDTO book);
 
