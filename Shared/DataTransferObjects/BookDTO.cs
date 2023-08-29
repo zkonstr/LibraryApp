@@ -15,5 +15,8 @@ namespace Shared.DataTransferObjects
         public string? Description { get; set; }
         public string? Author { get; set; }
         public string? Genre { get; set; }
+        public DateTime? OrderDate { get; set; }
+        public DateTime? ExpiredDate { get; set; }
+        public Guid OwnerId { get; set; }
     }
 }

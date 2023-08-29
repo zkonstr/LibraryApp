@@ -16,7 +16,6 @@ namespace Repository
         }
 
         public DbSet<User>? Users { get; set; }
-        public DbSet<Book>? Books { get; set; }
-        public DbSet<BookUserReference> BookUserReferences { get; set; }        
+        public DbSet<Book>? Books { get; set; }      
     }
 }

@@ -6,6 +6,5 @@ namespace ServiceContracts
     {
         IUserService UserService { get; }
         IBookService BookService { get; }
-        IBookUserReferenceService BookUserReferenceService { get; }
     }
 }
